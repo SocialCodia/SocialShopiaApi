@@ -6,6 +6,7 @@ class OrderValidation {
     createOrder = Joi.object({
         addressId: Joi.objectId().required(),
         paymentMethodId: Joi.objectId().required(),
+        couponId: Joi.objectId(),
         note: Joi.string().max(1000),
     });
 

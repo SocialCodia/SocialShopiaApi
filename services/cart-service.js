@@ -14,6 +14,8 @@ class CartService {
 
     deleteCart = async (filter) => await CartModel.deleteOne(filter);
 
+    deleteCarts = async (filter) => await CartModel.deleteMany(filter);
+
 }
 
 module.exports = new CartService();

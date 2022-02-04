@@ -42,11 +42,20 @@ const orderSchema = new Schema({
         maxlength: 1000,
         required: true
     },
-    amount: {
+    totalAmount: {
+        type: Number,
+        required: true
+    },
+    payableAmount: {
         type: Number,
         required: true
     },
     couponDiscount: {
+        type: Number,
+        default: 0,
+        required: false
+    },
+    productDiscount: {
         type: Number,
         default: 0,
         required: false

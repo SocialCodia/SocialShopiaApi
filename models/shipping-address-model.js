@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const shippingAddressSchema = new Schema({
-
     userId: {
         type: Schema.Types.ObjectId,
         ref: 'User',
@@ -44,10 +43,6 @@ const shippingAddressSchema = new Schema({
         minlength: 10,
         maxlength: 13
     },
-    default: {
-        type: Boolean,
-        default: false,
-    },
     longitude: {
         type: String,
         required: false,
@@ -56,8 +51,8 @@ const shippingAddressSchema = new Schema({
         type: String,
         required: false
     },
-},{
-    timestamps:true
+}, {
+    timestamps: true
 });
 
 

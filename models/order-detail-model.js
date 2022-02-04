@@ -49,9 +49,9 @@ const orderDetailSchema = new Schema({
         type: String,
         required: true
     },
-    attributeId: {
+    stockId: {
         type: Schema.Types.ObjectId,
-        ref: 'Attribute',
+        ref: 'ProductStock',
         required: true,
     },
 }, {
