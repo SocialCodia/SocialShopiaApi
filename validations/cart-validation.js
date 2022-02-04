@@ -4,13 +4,13 @@ Joi.objectId = require('joi-objectid')(Joi);
 class CartValidation {
 
     createCart = Joi.object({
-        id: Joi.objectId().required(),
+        productId: Joi.objectId().required(),
+        stockId: Joi.objectId().required(),
         quantity: Joi.number().min(1).max(1000).default(1)
     });
 
     updateCart = Joi.object({
         id: Joi.objectId().required(),
-
     });
 
     updateCarts = Joi.object({

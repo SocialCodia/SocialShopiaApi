@@ -1,15 +1,18 @@
 const ProductDto = require('./product-dto');
+const ProductStockDto = require('./product-stock-dto');
 
 class CartDto {
 
     id;
-    quantity;
+    quantity
+    choiceOption;
     product;
 
     constructor(data) {
-        this.quantity = data.quantity;
         this.id = data.id;
-        this.product = new ProductDto(data.productId);
+        this.choiceOption = data.choiceOption && new ProductStockDto(data.stockId);
+        this.quantity = data.quantity;
+        this.product = data.productId && new ProductDto(data.productId);
     }
 
 }

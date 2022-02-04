@@ -12,6 +12,11 @@ const cartSchema = new Schema({
         ref: 'User',
         required: true
     },
+    stockId: {
+        type: Schema.Types.ObjectId,
+        ref: 'ProductStock',
+        required: true
+    },
     quantity: {
         type: Number,
         default: 0

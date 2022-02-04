@@ -14,6 +14,9 @@ class Constants {
 
     static PLACEHOLDER_USER_IMAGE = process.env.APP_URL_STORAGE + '/profile/user.png'
 
+    static DISCOUNT_TYPE_PERCENT = "percent";
+    static DISCOUNT_TYPE_AMOUNT = "amount";
+
     static MESSAGE_USER_NOT_FOUND = "No User Found";
     static MESSAGE_USER_FOUND = "User Found";
 
@@ -36,6 +39,15 @@ class Constants {
     static MESSAGE_ATTRIBUTE_UPDATE = "Attribute Updated";
     static MESSAGE_ATTRIBUTE_DELETED = "Attribute Deleted";
 
+    //Coupon
+    static MESSAGE_COUPON_ADDED = "Coupon Added";
+    static MESSAGE_COUPON_ADD_FAILED = "Failed To Add Coupon";
+    static MESSAGE_COUPON_FOUND = "Coupon Found";
+    static MESSAGE_COUPON_NOT_FOUND = "No Coupon Found";
+    static MESSAGE_COUPON_ID_INVALID = "Invalid Coupon Id";
+    static MESSAGE_COUPON_UPDATE = "Coupon Updated";
+    static MESSAGE_COUPON_DELETED = "Coupon Deleted";
+
     //Banner
     static MESSAGE_BANNER_ADDED = "Banner Added";
     static MESSAGE_BANNER_ADD_FAILED = "Failed To Add Banner";
@@ -54,7 +66,6 @@ class Constants {
     static MESSAGE_TIME_SLOT_UPDATE = "Time Slot Updated";
     static MESSAGE_TIME_SLOT_DELETED = "Time Slot Deleted";
 
-
     //Wishlist
     static MESSAGE_WISHLIST_ADDED = "Wishlist Added";
     static MESSAGE_WISHLIST_ADD_FAILED = "Failed To Add Wishlist";
@@ -62,7 +73,6 @@ class Constants {
     static MESSAGE_WISHLIST_NOT_FOUND = "No Wishlist Found";
     static MESSAGE_WISHLIST_ID_INVALID = "Invalid Wishlist Id";
     static MESSAGE_WISHLIST_DELETED = "Wishlist Deleted";
-
 
     //Cart
     static MESSAGE_CART_ADDED = "Cart Added";
@@ -72,7 +82,6 @@ class Constants {
     static MESSAGE_CART_ID_INVALID = "Invalid Cart Id";
     static MESSAGE_CART_UPDATE = "Cart Updated";
     static MESSAGE_CART_DELETED = "Cart Deleted";
-
 
     //Order
     static MESSAGE_ORDER_ADDED = "Order Added";

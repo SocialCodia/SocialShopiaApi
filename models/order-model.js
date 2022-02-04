@@ -51,6 +51,14 @@ const orderSchema = new Schema({
         default: 0,
         required: false
     },
+    date: {
+        type: Date,
+        required: false
+    },
+    timeSlotId: {
+        type: Schema.Types.ObjectId,
+        ref: 'TimeSlot',
+    },
     couponId: {
         type: Schema.Types.ObjectId,
         ref: 'Coupon',
@@ -60,7 +68,6 @@ const orderSchema = new Schema({
         default: 0,
         required: false
     }
-
 }, {
     timestamps: true
 });

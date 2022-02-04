@@ -13,6 +13,7 @@ const upload = require('../services/file-upload-service');
 const paymentMethodController = require('../controllers/payment-method-controller');
 const bannerController = require('../controllers/banner-controller');
 const timeSlotController = require('../controllers/time-slot-controller');
+const couponController = require('../controllers/coupon-controller');
 
 //Countries
 router.post('/country', am(countryController.createCountry));
@@ -68,6 +69,12 @@ router.post('/banner', am(bannerController.createBanner));
 router.patch('/banner', am(bannerController.updateBanner));
 router.delete('/banner', am(bannerController.deleteBanner));
 
+//Coupon
+router.post('/coupon', am(couponController.createCoupon));
+router.get('/coupons', am(couponController.findCoupons));
+router.get('/coupons/:type', am(couponController.findCoupons));
+router.patch('/coupon', am(couponController.updateCoupon));
+router.delete('/coupon', am(couponController.deleteCoupon));
 
 //Payment Method
 router.post('/payment-method', am(paymentMethodController.createPaymentMethod));

@@ -4,9 +4,11 @@ class addressService {
 
     createAddress = async data => await ModelAddress.create(data);
 
-    findAddresses = async filter => await ModelAddress.find(filter).populate('countryId').populate('stateId').populate('cityId');
+    findAddresses = async filter => await ModelAddress.find(filter).populate({ path: 'countryId stateId cityId' });
 
-    findAddress = async filter => await ModelAddress.findOne(filter).populate('countryId').populate('stateId').populate('cityId');
+    findAddress = async filter => await ModelAddress.findOne(filter).populate({ path: 'countryId stateId cityId' });
+
+    findAddressMiny = async filter => await ModelAddress.findOne(filter);
 
     findAddressAndUpdate = async (filter, data) => await ModelAddress.findOneAndUpdate(filter, data);
 

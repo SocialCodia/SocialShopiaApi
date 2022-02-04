@@ -9,7 +9,7 @@ const cartController = require('../controllers/cart-controller');
 
 //Adddresses
 router.post('/address', am(addressController.createAddress));
-router.get('/address', am(addressController.findAddresses));
+router.get('/addresses', am(addressController.findAddresses));
 router.get('/address/:id', am(addressController.findAddress));
 router.patch('/address', am(addressController.updateAddress));
 router.patch('/address/default', am(addressController.makeAddressDefault));
@@ -32,7 +32,7 @@ router.patch('/cart', am(cartController.updateCarts));
 router.delete('/cart', am(cartController.deleteCart));
 
 
-//Carts
+//Order
 router.post('/order', am(orderController.createOrder));
 router.get('/orders', am(orderController.findOrders));
 router.get('/order/:id', am(orderController.findOrder));

@@ -29,13 +29,13 @@ class ProductDto {
     constructor(data) {
         this.id = data._id;
         this.name = data.name;
-        this.category = new CategoryDto(data.categoryId);
-        this.brand = new BrandDto(data.brandId);
-        this.images = data.images.map((x) => new UploadDto(x));
+        this.category = data.categoryId && new CategoryDto(data.categoryId);
+        this.brand = data.brand && new BrandDto(data.brandId);
+        this.images = data.images && data.images.map((x) => new UploadDto(x));
         this.thumbnail = process.env.APP_URL_IMAGES + data.thumbnail.path;
         this.description = data.description;
         this.price = data.price;
-        this.choiceOptions = data.stockIds == null ? null : data.stockIds.map((x) => new ProductStockDto(x));
+        this.choiceOptions = data.stockIds && data.stockIds.map((x) => new ProductStockDto(x));
         this.featured = data.featured;
         this.todaysDeal = data.todaysDeal;
         this.metaTitle = data.metaTitle;
