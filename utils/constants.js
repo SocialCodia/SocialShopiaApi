@@ -9,6 +9,12 @@ class Constants {
     static USER_STATUS_UNVERIFIED = 'unverified';
     static USER_STATUS_BANNED = 'banned';
 
+    static USER_TYPE_USER = "user";
+    static USER_TYPE_ADMIN = "admin";
+
+    static PAYMENT_STATUS_PAID = "paid";
+    static PAYMENT_STATUS_UNPAID = "unpaid";
+
 
     static BCRYPT_PASSWORD_SALT_FACTOR = 10;
 
@@ -21,6 +27,14 @@ class Constants {
     static MESSAGE_USER_FOUND = "User Found";
 
     static MESSAGE_ACCOUNT_UPDATE = "Account Updated";
+
+    static ORDER_TYPE_PENDING = "pending";
+    static ORDER_TYPE_CONFIRMED = "confirmed";
+    static ORDER_TYPE_PROCESSING = "processing";
+    static ORDER_TYPE_OUR_FOR_DELIVERY = "out_for_delivery";
+    static ORDER_TYPE_RETURNED = "returned";
+    static ORDER_TYPE_FAILED = "failed";
+    static ORDER_TYPE_CANCELED = "canceled";
 
     static MESSAGE_ADDRESS_FOUND = "Address Found";
     static MESSAGE_ADDRESS_NOT_FOUND = "No Address Found";

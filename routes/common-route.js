@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const timeSlotController = require('../controllers/time-slot-controller');
+
 const am = require('../middlewares/async-middleware');
 
 router.get('/time-slots', am(timeSlotController.findTimeSlots));

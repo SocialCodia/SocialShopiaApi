@@ -6,6 +6,7 @@ const upload = require('../services/file-upload-service');
 const wishlistController = require('../controllers/wishlist-controller');
 const orderController = require('../controllers/order-controller');
 const cartController = require('../controllers/cart-controller');
+const orderDetailController = require('../controllers/order-detail-controller');
 
 //Adddresses
 router.post('/address', am(addressController.createAddress));
@@ -31,12 +32,16 @@ router.get('/cart/:id', am(cartController.findCart));
 router.patch('/cart', am(cartController.updateCarts));
 router.delete('/cart', am(cartController.deleteCart));
 
-
 //Order
 router.post('/order', am(orderController.createOrder));
 router.get('/orders', am(orderController.findOrders));
+router.get('/orders/:status', am(orderController.findOrders));
+router.get('/orders/:status/:payment', am(orderController.findOrder));
 router.get('/order/:id', am(orderController.findOrder));
 router.patch('/order', am(orderController.updateOrders));
+
+//Order Detail
+router.get('/order-detail/:id', am(orderDetailController.findOrderDetail));
 
 
 module.exports = router;

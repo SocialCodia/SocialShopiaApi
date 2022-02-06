@@ -40,7 +40,7 @@ class ProductDto {
         this.todaysDeal = data.todaysDeal;
         this.metaTitle = data.metaTitle;
         this.metaDescription = data.metaDescription;
-        this.metaImage = process.env.APP_URL_IMAGES + data.metaImage.path;
+        this.metaImage = data.metaImage && process.env.APP_URL_IMAGES + data.metaImage.path;
         this.slug = data.slug;
         this.hasDiscount = data.discount > 0;
         this.discount = data.discount;

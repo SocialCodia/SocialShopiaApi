@@ -7,6 +7,8 @@ const addressService = require('../services/address-service');
 const shippingAddressService = require('../services/shipping-address-service');
 const couponService = require('../services/coupon-service');
 const orderDetailService = require('../services/order-detail-service');
+const OrderDto = require('../dtos/order-dto');
+const mongoose = require('mongoose');
 
 class OrderController {
 
@@ -35,7 +37,7 @@ class OrderController {
         if (!shippingAddress)
             return next(ErrorHandler.serverError('Failed To Store Shipping Address'));
         const cartItems = await cartService.findCarts({ userId: req.user.id });  // cart items
-        if (!cartItems || cartItems.length<1)
+        if (!cartItems || cartItems.length < 1)
             return next(ErrorHandler.notFound('Cart Is Empty'));
 
         let orderDetails = [];
@@ -119,23 +121,69 @@ class OrderController {
         res.json({ success: true, message: Constants.MESSAGE_ORDER_ADDED });
     }
 
-    // findOrders = async (req, res, next) => {
-    //     const result = await orderService.findOrders(null);
-    //     if (!result || result.length < 1)
-    //         return next(ErrorHandler.serverError(Constants.MESSAGE_ORDER_NOT_FOUND));
-    //     const data = result.map((x) => new OrderDto(x));
-    //     res.json({ success: true, message: Constants.MESSAGE_ORDER_FOUND, data });
-    // }
+    findOrders = async (req, res, next) => {
+        const { status, payment } = req.params;
+        let { page } = req.query;
+        page = page < 1 ? 1 : page;
+        let filter = {};
+        switch (status) {
+            case Constants.ORDER_TYPE_PENDING:
+                filter = { status: Constants.ORDER_TYPE_PENDING };
+                break;
+            case Constants.ORDER_TYPE_CONFIRMED:
+                filter = { status: Constants.ORDER_TYPE_CONFIRMED };
+                break;
+            case Constants.ORDER_TYPE_PROCESSING:
+                filter = { status: Constants.ORDER_TYPE_PROCESSING };
+                break;
+            case Constants.ORDER_TYPE_OUR_FOR_DELIVERY:
+                filter = { status: Constants.ORDER_TYPE_OUR_FOR_DELIVERY };
+                break;
+            case Constants.ORDER_TYPE_RETURNED:
+                filter = { status: Constants.ORDER_TYPE_RETURNED };
+                break;
+            case Constants.ORDER_TYPE_FAILED:
+                filter = { status: Constants.ORDER_TYPE_FAILED };
+                break;
+            case Constants.ORDER_TYPE_CANCELED:
+                filter = { status: Constants.ORDER_TYPE_CANCELED };
+                break;
+            case null:
+                filter = {};
+                break;
+            case undefined:
+                filter = {};
+                break;
+            default:
+                return next(ErrorHandler.badRequest('Invalid Order Type'));
+        }
+        switch (payment) {
+            case Constants.PAYMENT_STATUS_PAID:
+                filter.paymentStatus = Constants.PAYMENT_STATUS_PAID;
+                break;
+            case Constants.PAYMENT_STATUS_UNPAID:
+                filter.paymentStatus = Constants.PAYMENT_STATUS_UNPAID;
+                break;
+        }
+        if (!req.user.type == Constants.USER_TYPE_ADMIN)
+            filter.userId = req.user.id;
+        const result = await orderService.findOrders(filter, page - 1);
+        if (!result || result.length < 1)
+            return next(ErrorHandler.serverError(Constants.MESSAGE_ORDER_NOT_FOUND));
+        const data = result.map((x) => new OrderDto(x));
+        res.json({ success: true, message: Constants.MESSAGE_ORDER_FOUND, data });
+    }
 
-    // findOrder = async (req, res, next) => {
-    //     const { id } = req.params;
-    //     if (!mongoose.isValidObjectId(id))
-    //         return next(ErrorHandler.serverError(Constants.MESSAGE_ORDER_ID_INVALID));
-    //     const result = await orderService.findOrder({ _id: id });
-    //     if (!result)
-    //         return next(ErrorHandler.serverError(Constants.MESSAGE_ORDER_NOT_FOUND));
-    //     res.json({ success: true, message: Constants.MESSAGE_ORDER_FOUND, data: new OrderDto(result) });
-    // }
+    findOrder = async (req, res, next) => {
+        const { id } = req.params;
+        if (!mongoose.isValidObjectId(id))
+            return next(ErrorHandler.serverError(Constants.MESSAGE_ORDER_ID_INVALID));
+        const result = await orderService.findOrder({ _id: id });
+        // return res.json({result});
+        if (!result)
+            return next(ErrorHandler.serverError(Constants.MESSAGE_ORDER_NOT_FOUND));
+        res.json({ success: true, message: Constants.MESSAGE_ORDER_FOUND, data: new OrderDto(result) });
+    }
 
     // updateOrder = async (req, res, next) => {
     //     const body = await orderValidation.updateOrder.validateAsync(req.body);
