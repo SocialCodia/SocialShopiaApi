@@ -1,5 +1,5 @@
 const cartService = require('../services/cart-service');
-const cartValidation = require('../validations/Cart-validation');
+const cartValidation = require('../validations/cart-validation');
 const ErrorHandler = require('../utils/error-handler');
 const CartDto = require('../dtos/cart-dto');
 const mongoose = require('mongoose');
@@ -11,12 +11,12 @@ class CartController {
         let cart;
         const body = await cartValidation.createCart.validateAsync(req.body);
         body.userId = req.user.id;
-        const cartItem = await cartService.findCart({ userId: req.user.id, productId: body.productId,stockId:body.stockId });
+        const cartItem = await cartService.findCart({ userId: req.user.id, productId: body.productId, stockId: body.stockId });
         console.log(cartItem);
         if (!cartItem)
             cart = await cartService.createCart(body);
         else
-            cart = await cartService.updateCart({ productId: body.productId, userId: req.user.id,stockId:body.stockId },{quantity: cartItem.quantity + 1});
+            cart = await cartService.updateCart({ productId: body.productId, userId: req.user.id, stockId: body.stockId }, { quantity: cartItem.quantity + 1 });
         if (!cart)
             return next(ErrorHandler.serverError(Constants.MESSAGE_CART_ADD_FAILED));
         res.json({ success: true, message: Constants.MESSAGE_CART_ADDED });
