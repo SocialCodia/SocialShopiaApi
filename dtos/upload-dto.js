@@ -8,7 +8,7 @@ class UploadDto {
     constructor(data) {
         this.id = data._id;
         this.name = data.name;
-        this.path = data.path;
+        this.path = process.env.APP_URL_IMAGES + data.path;
     }
 
 }

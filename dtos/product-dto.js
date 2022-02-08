@@ -32,7 +32,7 @@ class ProductDto {
         this.category = data.categoryId && new CategoryDto(data.categoryId);
         this.brand = data.brand && new BrandDto(data.brandId);
         this.images = data.images && data.images.map((x) => new UploadDto(x));
-        this.thumbnail = data.thumbnail && data.thumbnail.path;
+        this.thumbnail = data.thumbnail && process.env.APP_URL_IMAGES + data.thumbnail.path;
         this.description = data.description;
         this.price = data.price;
         this.choiceOptions = data.stockIds && data.stockIds.map((x) => new ProductStockDto(x));
@@ -40,7 +40,7 @@ class ProductDto {
         this.todaysDeal = data.todaysDeal;
         this.metaTitle = data.metaTitle;
         this.metaDescription = data.metaDescription;
-        this.metaImage = data.metaImage && data.metaImage.path;
+        this.metaImage = data.metaImage && process.env.APP_URL_IMAGES + data.metaImage.path;
         this.slug = data.slug;
         this.hasDiscount = data.discount > 0;
         this.discount = data.discount;
