@@ -1,4 +1,4 @@
-const WishlistModel = require('../models/Wishlist-model');
+const WishlistModel = require('../models/wishlist-model');
 
 class WishlistService {
 
