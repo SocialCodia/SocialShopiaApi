@@ -12,7 +12,7 @@ class UserDto {
         this.id = user._id;
         this.name = user.name;
         this.email = user.email;
-        this.image = user.image == null ? Constants.PLACEHOLDER_USER_IMAGE : process.env.APP_URL_IMAGES + user.image;
+        this.image = user.image == null ? Constants.PLACEHOLDER_USER_IMAGE : user.image;
         this.type = user.type;
     }
 

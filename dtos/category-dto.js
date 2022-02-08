@@ -13,7 +13,7 @@ class CategoryDto {
     constructor(data) {
         this.id = data._id;
         this.name = data.name;
-        this.icon = data.icon && process.env.APP_URL_IMAGES + new UploadDto(data.icon).path;
+        this.icon = data.icon && new UploadDto(data.icon).path;
         this.banner = data.banner;
         this.featured = data.featured;
         this.slug = data.slug;

@@ -13,7 +13,7 @@ class BrandDto {
     constructor(data) {
         this.id = data.id;
         this.name = data.name;
-        this.logo = process.env.APP_URL_IMAGES + new UploadDto(data.logo).path;
+        this.logo = data.logo && new UploadDto(data.logo).path;
         this.featured = data.featured;
         this.slug = data.slug;
         this.metaTitle = data.metaTitle;
