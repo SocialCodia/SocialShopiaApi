@@ -18,7 +18,7 @@ const app = express();
 
 const corsOption = {
     credentials: true,
-    origin: ['http://localhost:3000', 'http://localhost:80', 'https://socialshopia-api.herokuapp.com', 'http://socialshopia-api.herokuapp.com', '*']
+    origin: ['http://localhost:3000', 'http://localhost:80', 'https://socialshopia.herokuapp.com', 'http://socialshopia.herokuapp.com', '*']
 }
 
 app.use(cors(corsOption));
