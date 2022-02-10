@@ -29,6 +29,7 @@ router.get('/category/:id', am(categoryController.findCategory));
 
 //Products
 router.get('/products', am(productController.findProducts));
+router.get('/products/:type', am(productController.findProducts));
 router.get('/product/:id', am(productController.findProduct));
 
 

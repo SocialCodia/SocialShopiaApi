@@ -43,7 +43,6 @@ class ProductControlelr {
 
         res.json({ success: true, message: 'Product Added' });
     }
-
     findProduct = async (req, res, next) => {
         const { id } = req.params;
         let filter = { _id: id };
@@ -58,6 +57,10 @@ class ProductControlelr {
 
 
     findProducts = async (req, res, next) => {
+        const { type } = req.params;
+        let filter = {};
+        if (type && type == 'featured')
+            filter.feature = true;
         const result = await productService.findProducts();
         if (!result)
             return next(ErrorHandler.serverError('No Product Found'));
