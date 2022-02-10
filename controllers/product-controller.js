@@ -4,6 +4,7 @@ const productStockService = require('../services/product-stock-service');
 const ErrorHandler = require('../utils/error-handler');
 const ProductDto = require('../dtos/product-dto');
 const mongoose = require('mongoose');
+const Constants = require('../utils/constants');
 
 class ProductControlelr {
 
@@ -54,15 +55,18 @@ class ProductControlelr {
         res.json({ success: true, message: 'Products Found', data: new ProductDto(result) });
     }
 
-
-
     findProducts = async (req, res, next) => {
         const { type } = req.params;
         let filter = {};
         if (type && type == 'featured')
-            filter.feature = true;
-        if (type && type == 'todaysdeal')
+            filter.featured = true;
+        else if (type && type == 'todaysdeal')
             filter.todaysDeal = true;
+
+        if (!req.user || !req.user.type == Constants.USER_TYPE_ADMIN)
+            filter.publish = true;
+
+        console.log(filter);
         const result = await productService.findProducts(filter);
         if (!result || result.length < 1)
             return next(ErrorHandler.serverError('No Product Found'));
