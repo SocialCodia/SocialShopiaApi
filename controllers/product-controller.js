@@ -61,7 +61,9 @@ class ProductControlelr {
         let filter = {};
         if (type && type == 'featured')
             filter.feature = true;
-        const result = await productService.findProducts();
+        if (type && type == 'todaysdeal')
+            filter.todaysDeal = true;
+        const result = await productService.findProducts(filter);
         if (!result)
             return next(ErrorHandler.serverError('No Product Found'));
         const data = result.map((x) => {
