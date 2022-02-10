@@ -22,10 +22,13 @@ class CategoryController {
         const { id } = req.params;
         let filter = { $exists: false };
         if (id && !mongoose.isValidObjectId(id))
-            return next(ErrorHandler.badRequest('Invalid Category Id'));
+            if (id == 'featured')
+                filter.featured = true;
+            else
+                return next(ErrorHandler.badRequest('Invalid Category Id'));
         if (id)
-            filter = id
-        const result = await categoryService.findCategories({ parentId: filter });
+            filter.id = id
+        const result = await categoryService.findCategories(filter);
         if (!result || result.length < 1)
             return next(ErrorHandler.notFound('No Category Found'));
         const data = result.map((x) => new CategoryDto(x));
