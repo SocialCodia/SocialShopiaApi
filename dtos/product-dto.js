@@ -42,6 +42,7 @@ class ProductDto {
         this.metaDescription = data.metaDescription;
         this.metaImage = data.metaImage && process.env.APP_URL_IMAGES + data.metaImage.path;
         this.slug = data.slug;
+        this.discountPrice = data.discount > 0 && data.discountType == 'percent' ? data.price - (data.price * data.discount) / 100 : data.price - data.discount;
         this.hasDiscount = data.discount > 0;
         this.discount = data.discount;
         this.discountType = data.discountType;
