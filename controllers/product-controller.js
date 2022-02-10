@@ -64,11 +64,9 @@ class ProductControlelr {
         if (type && type == 'todaysdeal')
             filter.todaysDeal = true;
         const result = await productService.findProducts(filter);
-        if (!result || result.length < 0)
+        if (!result || result.length < 1)
             return next(ErrorHandler.serverError('No Product Found'));
-        const data = result.map((x) => {
-            return new ProductDto(x);
-        })
+        const data = result.map((x) => new ProductDto(x));
         res.json({ success: true, message: 'Products Found', data });
     }
 
